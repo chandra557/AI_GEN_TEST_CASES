@@ -1,43 +1,52 @@
 
 
-## Unit Test 1: Test User Input
+Sure, here is an example structure for a test script in Python using the popular `unittest` library along with a data structure in markdown format:
 
-### Description
-This unit test will check if the user input is being correctly processed in the program.
-
-### Test Data
+`test_unit_1.py`:
 ```python
-from my_program import process_user_input
+import unittest
 
-def test_user_input():
-    assert process_user_input("hello") == "You said: hello"
-    assert process_user_input("How are you?") == "You said: How are you?"
+class TestUnit1(unittest.TestCase):
+    
+    def test_case_1(self):
+        # Your test case 1 code here
+        pass
+    
+    def test_case_2(self):
+        # Your test case 2 code here
+        pass
+
+if __name__ == '__main__':
+    unittest.main()
 ```
 
-## Unit Test 2: Test ChatGPT Response
+Markdown format for test data:
 
-### Description
-This unit test will check if the ChatGPT model is generating valid responses to user input.
+# Test Unit 1
+## Test Case 1
+This test case checks for the correctness of the output when the input is {input_data_1}
 
-### Test Data
-```python
-from my_program import generate_gpt_response
-
-def test_chatgpt_response():
-    assert generate_gpt_response("hello") == "Nice to meet you!"
-    assert generate_gpt_response("How are you?") == "I'm doing well, thank you for asking."
+### Input
+```
+{input_data_1}
 ```
 
-## Unit Test 3: Test ChatGPT with Invalid Input
-
-### Description
-This unit test will check if the program handles invalid input gracefully.
-
-### Test Data
-```python
-from my_program import generate_gpt_response
-
-def test_invalid_input():
-    assert generate_gpt_response("") == "I'm sorry, I didn't understand that."
-    assert generate_gpt_response("!@#$%") == "I'm sorry, I didn't understand that."
+### Expected Output
 ```
+{expected_output_1}
+```
+
+## Test Case 2
+This test case checks for the correctness of the output when the input is {input_data_2}
+
+### Input
+```
+{input_data_2}
+```
+
+### Expected Output
+```
+{expected_output_2}
+```
+
+You can create similar test scripts and corresponding markdown data for each unit test and save them in separate files. This way, you have a clear separation of concerns for each unit test, as well as a detailed description of the test cases and the expected outputs in markdown format.
