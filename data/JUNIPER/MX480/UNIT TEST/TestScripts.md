@@ -1,56 +1,57 @@
 
 
-Sure! Here is an example of how you can create separate Python scripts for each unit test, along with markdown-formatted data for headers, sub headers, paragraphs, and code snippets:
+Sure, here is an example of how you can structure your unit tests in separate Python files with data provided in Markdown format:
 
-### UnitTest1.py
+### test_addition.py
+
 ```python
 import unittest
+from my_math_functions import add
 
-class TestStringMethods(unittest.TestCase):
-    def test_upper(self):
-        self.assertEqual('hello'.upper(), 'HELLO')
+class TestAddition(unittest.TestCase):
+    def test_add_positive_numbers(self):
+        result = add(2, 3)
+        self.assertEqual(result, 5)
 
-    def test_isupper(self):
-        self.assertTrue('HELLO'.isupper())
-        self.assertFalse('Hello'.isupper())
+    def test_add_negative_numbers(self):
+        result = add(-5, -3)
+        self.assertEqual(result, -8)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
 ```
 
-### Markdown-formatted data for UnitTest1
-#### Description
-This unit test checks the functionality of the `upper()` and `isupper()` string methods.
+### my_math_functions.py
 
-#### Test Cases
-1. Test that `upper()` method converts a string to uppercase.
-2. Test that `isupper()` method correctly identifies uppercase strings.
+```python
+def add(a, b):
+    return a + b
+```
 
----
+### test_subtraction.py
 
-### UnitTest2.py
 ```python
 import unittest
+from my_math_functions import subtract
 
-class TestMathOperations(unittest.TestCase):
-    def test_addition(self):
-        self.assertEqual(2+2, 4)
+class TestSubtraction(unittest.TestCase):
+    def test_subtract_positive_numbers(self):
+        result = subtract(5, 3)
+        self.assertEqual(result, 2)
 
-    def test_subtraction(self):
-        self.assertEqual(5-3, 2)
+    def test_subtract_negative_numbers(self):
+        result = subtract(-5, -3)
+        self.assertEqual(result, -2)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
 ```
 
-### Markdown-formatted data for UnitTest2
-#### Description
-This unit test checks the basic arithmetic operations of addition and subtraction.
+### my_math_functions.py
 
-#### Test Cases
-1. Test that addition operation returns the expected result.
-2. Test that subtraction operation returns the expected result.
+```python
+def subtract(a, b):
+    return a - b
+```
 
----
-
-By organizing your unit tests and their corresponding data in separate files, you can easily maintain and document your testing process. This also allows you to create descriptive and informative markdown-formatted data for each unit test.
+This structure allows you to create separate test files for each unit of functionality in your code, making it easier to maintain and understand the tests. The Markdown format provided allows you to present the code and its output in a readable way that resembles the structure of a conversation in ChatGPT.
