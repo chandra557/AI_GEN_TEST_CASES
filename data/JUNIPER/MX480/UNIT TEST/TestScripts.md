@@ -1,65 +1,56 @@
 
 
-Certainly! Below is an example of a Python script for a unit test, along with some sample data using markdown format compatible with headers, sub-headers, paragraphs, and code snippets.
+Sure! Here is an example of how you can create separate Python scripts for each unit test, along with markdown-formatted data for headers, sub headers, paragraphs, and code snippets:
 
-Sample Python Script (test_addition.py):
-
+### UnitTest1.py
 ```python
 import unittest
-from calculator import add
 
-class TestAddition(unittest.TestCase):
-    def test_positive_numbers(self):
-        result = add(3, 5)
-        self.assertEqual(result, 8)
+class TestStringMethods(unittest.TestCase):
+    def test_upper(self):
+        self.assertEqual('hello'.upper(), 'HELLO')
 
-    def test_negative_numbers(self):
-        result = add(-2, -7)
-        self.assertEqual(result, -9)
-
-    def test_mixed_numbers(self):
-        result = add(10, -4)
-        self.assertEqual(result, 6)
+    def test_isupper(self):
+        self.assertTrue('HELLO'.isupper())
+        self.assertFalse('Hello'.isupper())
 
 if __name__ == '__main__':
     unittest.main()
 ```
 
-Sample Data in Markdown Format:
+### Markdown-formatted data for UnitTest1
+#### Description
+This unit test checks the functionality of the `upper()` and `isupper()` string methods.
 
-# Unit Test for Addition Function
+#### Test Cases
+1. Test that `upper()` method converts a string to uppercase.
+2. Test that `isupper()` method correctly identifies uppercase strings.
 
-## Positive Numbers
-When adding positive numbers, the output should be the sum of those numbers.
+---
 
-### Code
+### UnitTest2.py
 ```python
-result = add(3, 5)
+import unittest
+
+class TestMathOperations(unittest.TestCase):
+    def test_addition(self):
+        self.assertEqual(2+2, 4)
+
+    def test_subtraction(self):
+        self.assertEqual(5-3, 2)
+
+if __name__ == '__main__':
+    unittest.main()
 ```
 
-### Expected Output
-8
+### Markdown-formatted data for UnitTest2
+#### Description
+This unit test checks the basic arithmetic operations of addition and subtraction.
 
-## Negative Numbers
-When adding negative numbers, the output should be the sum of those numbers with a negative sign.
+#### Test Cases
+1. Test that addition operation returns the expected result.
+2. Test that subtraction operation returns the expected result.
 
-### Code
-```python
-result = add(-2, -7)
-```
+---
 
-### Expected Output
--9
-
-## Mixed Numbers
-When adding a positive and a negative number, the output should be the sum of those numbers.
-
-### Code
-```python
-result = add(10, -4)
-```
-
-### Expected Output
-6
-
-This markdown format can be used to document and organize the unit test cases and their expected outputs.
+By organizing your unit tests and their corresponding data in separate files, you can easily maintain and document your testing process. This also allows you to create descriptive and informative markdown-formatted data for each unit test.
