@@ -1,57 +1,40 @@
 
 
-For regression testing in Python, you can create separate test scripts for each regression test. Here's an example of a Python script for a regression test:
+Sure, here is an example of a Python script for a Regression test, along with some data in markdown format:
 
-test_case_1.py
-
-```python
-import unittest
-from your_module import regression_function_1
-
-class TestRegressionFunction1(unittest.TestCase):
-    def test_input_1(self):
-        result = regression_function_1(input_1)
-        self.assertEqual(result, expected_output_1)
-
-    def test_input_2(self):
-        result = regression_function_1(input_2)
-        self.assertEqual(result, expected_output_2)
-
-    # Add more test cases as needed
-
-if __name__ == '__main__':
-    unittest.main()
-```
-
-You can then define the test data in a markdown-compatible format:
-
-## Data for Regression Test 1
-### Input 1
-Paragraph describing the input data for test case 1.
+Python Script (regression_test_1.py):
 
 ```python
-input_1 = ...
+def regression_test_1(data):
+    # Perform regression test 1
+    # Insert code here
+
+    # Return the result
+    return result
 ```
 
-### Input 2
-Paragraph describing the input data for test case 2.
+Markdown Data:
 
+# Regression Test 1
+
+## Overview
+This test checks for regression in the feature X. The script `regression_test_1.py` contains the code to perform the test.
+
+## Test Data
+- Input: [1, 2, 3, 4, 5]
+- Expected Output: 10
+
+## Code Snippet
 ```python
-input_2 = ...
+def regression_test_1(data):
+    # Perform regression test 1
+    # Insert code here
+
+    # Return the result
+    return result
 ```
 
-### Expected Output 1
-Paragraph describing the expected output for test case 1.
+## Expected Output
+The expected output for regression test 1 is 10.
 
-```python
-expected_output_1 = ...
-```
-
-### Expected Output 2
-Paragraph describing the expected output for test case 2.
-
-```python
-expected_output_2 = ...
-```
-
-This approach allows you to clearly document the test data, expected outputs, and code snippets in a format that resembles the output format of ChatGPT. You can create similar Python scripts and corresponding markdown data for each regression test.
+This is an example of a regression test and data formatted in markdown that resembles the output format of ChatGPT. The Python script, `regression_test_1.py`, contains the code to perform the regression test, and the markdown data provides an overview, test data, code snippet, and expected output for the test.
