@@ -1,75 +1,61 @@
 
 
-### Unit Test Cases for Network MSeries Router MX480
+# Unit Test Cases for Network MSeries Router MX480
 
-#### Test Case 1: Power On Self Test (POST)
-**Scenario:** 
-- Verify that the MX480 router successfully completes the Power On Self Test (POST) upon start-up.
+## Test Case 1: Power On Self Test (POST) 
+### Description:
+Ensure that the router passes the Power On Self Test without any errors.
 
-**Steps:**
-1. Power on the MX480 router.
-2. Monitor the console for any POST errors.
-3. Record the result of the POST.
+### Test Steps:
+1. Power on the router.
+2. Check the POST results for any failed components or errors.
 
-**Expected Result:**
-- The router should complete the POST without any errors.
+### Expected Result:
+The router should pass the POST without any errors.
 
-#### Test Case 2: Interface Configuration
-**Scenario:**
-- Validate the configuration of network interfaces on the MX480 router.
+## Test Case 2: Interface Configuration 
+### Description:
+Verify the configuration of physical and logical interfaces on the router.
 
-**Steps:**
-1. Access the router's command line interface (CLI).
-2. Review the configuration of all network interfaces.
-3. Verify the correct settings for each interface (e.g., IP address, subnet mask, speed, duplex).
+### Test Steps:
+1. Configure a physical interface with a valid IP address.
+2. Configure a logical interface on the physical interface.
+3. Verify the interface status and IP address assignment.
 
-**Expected Result:**
-- All network interfaces should have the correct configuration settings.
+### Expected Result:
+Both physical and logical interfaces should be configured and the IP address assignment should be successful.
 
 ```bash
-show interfaces terse
+show interfaces ge-0/0/0
 ```
 
-#### Test Case 3: Routing Protocol Configuration
-**Scenario:**
-- Ensure that the routing protocols are properly configured and operational.
+## Test Case 3: Routing Functionality
+### Description:
+Test the routing functionality of the router.
 
-**Steps:**
-1. Check the current routing protocol configuration.
-2. Verify the status and connectivity of the routing protocols.
-3. Test the routing protocol functionality by transmitting test traffic.
+### Test Steps:
+1. Configure static routes on the router.
+2. Verify the reachability to a remote network using the configured routes.
 
-**Expected Result:**
-- The routing protocols should be properly configured and functioning without any issues.
+### Expected Result:
+The router should be able to route traffic to the remote network using the configured static routes.
 
 ```bash
-show route protocol
+show route
 ```
 
-#### Test Case 4: High Availability and Redundancy
-**Scenario:**
-- Test the high availability and redundancy features of the MX480 router.
+## Test Case 4: High Availability 
+### Description:
+Test the high availability features of the router.
 
-**Steps:**
-1. Simulate a failure scenario (e.g., link failure, hardware component failure).
-2. Monitor the router's behavior and failover to redundant systems.
-3. Ensure that traffic continues to flow without interruption during the failure.
+### Test Steps:
+1. Configure a redundant system with failover.
+2. Simulate a hardware or software failure.
+3. Verify the failover behavior and the continuity of network traffic.
 
-**Expected Result:**
-- The router should seamlessly failover to redundant systems and maintain high availability.
-
-#### Test Case 5: Performance and Scalability
-**Scenario:**
-- Measure the performance and scalability of the MX480 router under high load.
-
-**Steps:**
-1. Generate a significant amount of network traffic through the router.
-2. Monitor the router's performance metrics (e.g., CPU utilization, memory usage).
-3. Ensure that the router can handle the load without degrading performance.
-
-**Expected Result:**
-- The router should maintain stable performance and scalability under high load conditions.
+### Expected Result:
+The failover should occur seamlessly and the network traffic should continue without interruption.
 
 ```bash
-show system statistics
+show chassis routing-engine
 ```
