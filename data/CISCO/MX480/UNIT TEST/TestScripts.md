@@ -1,52 +1,58 @@
 
 
-Sure, here is an example structure for a test script in Python using the popular `unittest` library along with a data structure in markdown format:
+Sure! Below are separate Python scripts for each unit test. Additionally, I will provide data with markdown-compatible for headers, sub-headers, paragraphs, and code snippets that resemble the output format of ChatGPT.
 
-`test_unit_1.py`:
+### Unit Test 1: Test Addition Function
+#### Script: test_addition.py
 ```python
+# test_addition.py
 import unittest
+from calculator import addition
 
-class TestUnit1(unittest.TestCase):
-    
-    def test_case_1(self):
-        # Your test case 1 code here
-        pass
-    
-    def test_case_2(self):
-        # Your test case 2 code here
-        pass
+class TestAddition(unittest.TestCase):
+    def test_add_positive_numbers(self):
+        result = addition(3, 5)
+        self.assertEqual(result, 8)
+
+    def test_add_negative_numbers(self):
+        result = addition(-3, -5)
+        self.assertEqual(result, -8)
 
 if __name__ == '__main__':
     unittest.main()
 ```
 
-Markdown format for test data:
+### Unit Test 2: Test Subtraction Function
+#### Script: test_subtraction.py
+```python
+# test_subtraction.py
+import unittest
+from calculator import subtraction
 
-# Test Unit 1
-## Test Case 1
-This test case checks for the correctness of the output when the input is {input_data_1}
+class TestSubtraction(unittest.TestCase):
+    def test_subtract_positive_numbers(self):
+        result = subtraction(8, 5)
+        self.assertEqual(result, 3)
 
-### Input
-```
-{input_data_1}
-```
+    def test_subtract_negative_numbers(self):
+        result = subtraction(-3, -5)
+        self.assertEqual(result, 2)
 
-### Expected Output
-```
-{expected_output_1}
-```
-
-## Test Case 2
-This test case checks for the correctness of the output when the input is {input_data_2}
-
-### Input
-```
-{input_data_2}
+if __name__ == '__main__':
+    unittest.main()
 ```
 
-### Expected Output
-```
-{expected_output_2}
+### Data with Markdown Format
+#### Headers
+# Main Header
+## Sub Header
+
+#### Paragraphs
+This is a paragraph.
+
+#### Code Snippet
+```python
+print("Hello, world!")
 ```
 
-You can create similar test scripts and corresponding markdown data for each unit test and save them in separate files. This way, you have a clear separation of concerns for each unit test, as well as a detailed description of the test cases and the expected outputs in markdown format.
+Feel free to use the provided script and data for your needs. Let me know if you need any more help!
