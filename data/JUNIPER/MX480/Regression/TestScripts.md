@@ -1,48 +1,46 @@
 
 
-Certainly! Here's an example of a Python script for a simple linear regression test and the corresponding data in markdown format:
+Sure, here's an example of how a Python script for a regression test would look like:
 
-Python Script (linear_regression_test.py):
 ```python
+# test_regression_1.py
+
 import numpy as np
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
 
-# Sample data
-X = np.array([[1], [2], [3], [4]])
-y = np.array([3, 5, 7, 9])
+# Data
+X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
+y = np.array([2, 4, 5, 4, 5])
 
-# Create and fit the model
+# Model
 model = LinearRegression()
 model.fit(X, y)
 
-# Print the coefficients
-print("Slope:", model.coef_[0])
-print("Intercept:", model.intercept_)
+# Prediction
+y_pred = model.predict(X)
+
+# Evaluation
+mse = mean_squared_error(y, y_pred)
+print("Mean Squared Error:", mse)
 ```
 
-Markdown Formatted Data:
-```markdown
-# Linear Regression Test
+And here's an example of markdown compatible data for the test:
 
-## Introduction
-This test involves fitting a simple linear regression model to a small dataset to demonstrate the principles of linear regression.
-
-## Dataset
-We have a dataset consisting of two variables, X and y, where X represents the independent variable and y represents the dependent variable.
-```python
-X = np.array([[1], [2], [3], [4]])
-y = np.array([3, 5, 7, 9])
 ```
+# Regression Test 1
+## Description
+This test examines the performance of a simple linear regression model on a small dataset.
 
-## Model Fitting
-We use the `LinearRegression` model from the `sklearn` library to fit the model to the data.
+### Inputs
+- X: [1, 2, 3, 4, 5]
+- y: [2, 4, 5, 4, 5]
 
-## Model Coefficients
-After fitting the model, we print the coefficients:
-```python
-Slope: 2.0
-Intercept: 1.0
+### Steps
+1. Fit a linear regression model on X and y
+2. Predict the values using the model
+3. Calculate the Mean Squared Error (MSE) between the actual and predicted values
+
+### Expected Output
+Mean Squared Error: 0.7
 ```
-```
-
-This markdown data can be used to create a clear and organized documentation for the regression test in a tool like ChatGPT.
