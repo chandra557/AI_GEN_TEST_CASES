@@ -1,250 +1,308 @@
 
 
-# Regression Test Cases for Network Router MX480
+Regression Test Cases for Network M-Series Router MX480
 
-## Test Case 1: Power On Self Test
-### Description
-Verify that the router successfully completes the Power On Self Test (POST) without any errors.
+## Configuration Regression Test Cases
 
-### Steps
-1. Power on the router.
-2. Observe the LED indicators for any abnormal behavior.
-3. Check the console output for any error messages during boot-up.
+### Test Case 1: Basic Configuration Test
+Verify that the router is able to successfully accept and apply basic configuration settings such as hostname, management IP address, and interface configurations.
 
-### Expected Result
-The router completes the POST without any errors and boots up successfully.
-
-## Test Case 2: Port Configuration
-### Description
-Verify that all ports on the router are configured correctly and are operational.
-
-### Steps
-1. Connect a device to each port on the router.
-2. Verify that the ports are active and able to transmit and receive data.
-3. Check the port configuration settings.
-
-### Expected Result
-All ports should be operational and able to transmit/receive data without any issues.
-
-## Test Case 3: Routing and Switching Functionality
-### Description
-Verify that the router is able to perform routing and switching functions as expected.
-
-### Steps
-1. Configure multiple VLANs and assign them to different ports.
-2. Set up routing between the VLANs.
-3. Send packets between different VLANs and verify proper routing and switching behavior.
-
-### Expected Result
-The router should successfully route packets between VLANs and perform switching functions without any errors.
-
-## Test Case 4: Quality of Service (QoS) Configuration
-### Description
-Verify that the router is able to prioritize network traffic using Quality of Service (QoS) settings.
-
-### Steps
-1. Configure QoS settings for specific types of network traffic.
-2. Generate network traffic that matches the configured QoS settings.
-3. Monitor the traffic to ensure that QoS prioritization is working as expected.
-
-### Expected Result
-The router should prioritize network traffic according to the configured QoS settings.
-
-```python
-# Example QoS Configuration
-class-of-service {
-    interfaces {
-        ge-0/0/0 {
-            shaping-rate 100m;
-            scheduler-map out-scheduler;
-        }
-        ge-0/0/1 {
-            shaping-rate 50m;
-            scheduler-map out-scheduler;
-        }
-    }
-    schedulers {
-        out-scheduler {
-            transmit-rate 1m;
-            priority low;
-        }
-    }
-}
+**Input:**
+```
+set system host-name mx480
+set interfaces ge-0/0/0 unit 0 family inet address 192.168.1.1/24
+commit
 ```
 
-## Test Case 5: High Availability and Failover
-### Description
-Verify that the router is able to maintain high availability and perform failover in case of hardware or network issues.
+**Expected Output:**
+```
+Configuration committed successfully
+```
 
-### Steps
-1. Simulate a hardware or network failure on one of the redundant components (e.g., power supply, routing engine).
-2. Monitor the router's behavior during the failure to observe failover mechanisms.
-3. Restore the failed component and ensure that the router returns to normal operation.
+### Test Case 2: Protocol Configuration Test
+Verify that the router is able to configure and run various networking protocols such as OSPF or BGP without any errors.
 
-### Expected Result
-The router should demonstrate resilience to hardware or network failures and be able to perform failover seamlessly.
+**Input:**
+```
+set protocols ospf area 0.0.0.0 interface ge-0/0/0.0
+commit
+```
 
-These regression test cases cover a range of essential functionalities and aspects to ensure the reliability and performance of the Network Router MX480.
+**Expected Output:**
+```
+Configuration committed successfully
+```
+
+### Test Case 3: Quality of Service (QoS) Test
+Verify that the router is able to successfully prioritize network traffic and apply QoS policies according to defined rules.
+
+**Input:**
+```
+set class-of-service interfaces ge-0/0/0 unit 0 classifiers dscp test-dscp
+set class-of-service interfaces ge-0/0/0 unit 0 classifiers dscp test-behavior
+commit
+```
+
+**Expected Output:**
+```
+Configuration committed successfully
+```
+
+## Performance Regression Test Cases
+
+### Test Case 1: Throughput Test
+Verify that the router is able to sustain a certain level of throughput under heavy network traffic load.
+
+**Input:**
+```
+Start traffic generator to send data at 10Gbps rate and measure the router's throughput.
+```
+
+**Expected Output:**
+```
+Router continues to handle traffic at expected throughput without dropping packets.
+```
+
+### Test Case 2: Latency Test
+Verify that the router maintains low latency levels for network packets passing through it.
+
+**Input:**
+```
+Send multiple ICMP packets through the router and measure the round-trip latency.
+```
+
+**Expected Output:**
+```
+Latency remains within acceptable levels according to network requirements.
+```
+
+### Test Case 3: Packet Loss Test
+Verify that the router does not experience excessive packet loss under varying network conditions.
+
+**Input:**
+```
+Introduce network congestion and measure packet loss rates.
+```
+
+**Expected Output:**
+```
+Router maintains low packet loss rates even under high network load.
+```
+
+## Security Regression Test Cases
+
+### Test Case 1: Access Control List (ACL) Test
+Verify that the router correctly enforces ACL rules and filters network traffic according to defined access policies.
+
+**Input:**
+```
+Apply an ACL to deny specific IP traffic and verify that the router blocks the specified traffic.
+```
+
+**Expected Output:**
+```
+Router successfully denies traffic according to ACL rules.
+```
+
+### Test Case 2: Firewall and Security Policy Test
+Verify that the router correctly applies and enforces firewall and security policies to protect against unauthorized access and security threats.
+
+**Input:**
+```
+Apply a firewall policy to block unauthorized access attempts and verify that the router denies the unauthorized traffic.
+```
+
+**Expected Output:**
+```
+Router successfully blocks unauthorized access attempts according to firewall policy.
+
+## Conclusion
+The provided regression test cases cover a range of configuration, performance, and security aspects for the Network M-Series Router MX480. These tests are designed to ensure that the router functions correctly and meets the expected criteria for reliability, performance, and security.
 
 # Regression Test for MX480
 
-## Test Case 1: Interface Connectivity
+## Test Case 1: Interface Configuration
 
 ### Setup
-1. Connect the MX480 to the testing environment.
-2. Power on the MX480 and wait for the system to initialize.
+1. Connect to the MX480 router via console or SSH.
+2. Enter configuration mode by typing `configure` and pressing enter.
+3. Configure interface ge-0/0/0 with IP address 192.168.1.1/24 by typing the following commands:
+   ```
+   set interfaces ge-0/0/0 unit 0 family inet address 192.168.1.1/24
+   commit
+   ```
 
 ### Execution
-1. Log in to the MX480 console and check the status of all interfaces using the "show interfaces" command.
-2. Verify that all interfaces are up and there are no errors or drops.
+4. Verify the interface configuration by typing `show interfaces ge-0/0/0`.
 
 ### Verification
-- All interfaces should be in the "up" state.
-- There should be no errors or drops reported for any interface.
+5. Confirm that the output includes the configured IP address (192.168.1.1) for interface ge-0/0/0.
 
 ### Teardown
-1. Power off the MX480.
-2. Disconnect the MX480 from the testing environment.
+6. Remove the interface configuration by entering configuration mode and typing the following commands:
+   ```
+   delete interfaces ge-0/0/0 unit 0
+   commit
+   ```
 
-## Test Case 2: Routing Functionality
+## Test Case 2: BGP Peer Configuration
 
 ### Setup
-1. Connect the MX480 to a network with multiple connected devices.
-2. Power on the MX480 and wait for the system to initialize.
+1. Connect to the MX480 router via console or SSH.
+2. Enter configuration mode by typing `configure` and pressing enter.
+3. Configure a BGP peer with the IP address 10.0.0.1 by typing the following commands:
+   ```
+   set protocols bgp group external-peers neighbor 10.0.0.1
+   commit
+   ```
 
 ### Execution
-1. Configure routing protocols (e.g. OSPF, BGP) on the MX480.
-2. Verify that the MX480 can successfully route traffic between the connected devices.
+4. Verify the BGP peer configuration by typing `show bgp neighbor`.
 
 ### Verification
-- All connected devices should be able to communicate with each other through the MX480.
-- Routing tables should be populated with the correct routes.
+5. Confirm that the output includes the configured BGP peer with the IP address 10.0.0.1.
 
 ### Teardown
-1. Power off the MX480.
-2. Disconnect the MX480 from the network.
+6. Remove the BGP peer configuration by entering configuration mode and typing the following commands:
+   ```
+   delete protocols bgp group external-peers neighbor 10.0.0.1
+   commit
+   ```
 
-## Test Case 3: High Availability
+## Test Case 3: ACL Configuration
 
 ### Setup
-1. Configure a redundant setup with two MX480 routers in a high availability (redundancy) configuration.
-2. Power on both MX480 routers and ensure they synchronize their configurations.
+1. Connect to the MX480 router via console or SSH.
+2. Enter configuration mode by typing `configure` and pressing enter.
+3. Configure an ACL to block traffic from source IP 192.168.1.2 to destination IP 10.0.0.1 by typing the following commands:
+   ```
+   set firewall family inet filter my-acl term 1 from source-address 192.168.1.2/32
+   set firewall family inet filter my-acl term 1 from destination-address 10.0.0.1/32
+   set firewall family inet filter my-acl term 1 then discard
+   commit
+   ```
 
 ### Execution
-1. Simulate a failure on one of the MX480 routers (e.g. power off one of the routers).
-2. Verify that the other MX480 router takes over the traffic seamlessly without any interruption.
+4. Verify the ACL configuration by typing `show configuration firewall family inet filter my-acl`.
 
 ### Verification
-- There should be no loss of connectivity when one MX480 router fails.
-- The active and standby status of the routers should switch appropriately.
+5. Confirm that the output includes the configured ACL with the specified source and destination addresses.
 
 ### Teardown
-1. Power off both MX480 routers.
-2. Disconnect the MX480 routers from the redundant setup.
+6. Remove the ACL configuration by entering configuration mode and typing the following commands:
+   ```
+   delete firewall family inet filter my-acl
+   commit
+   ```
 
+# MX480 Regression Test
+
+## Test Overview
+The MX480 regression test is designed to validate the performance and functionality of the MX480 router. This test will include a series of tests for key features such as routing, firewall, and quality of service (QoS).
+
+## Test Environment
+The regression test will be conducted in a lab environment using the following setup:
+- MX480 router
+- Test traffic generator
+- Test automation framework
+
+## Test Cases
+
+### 1. Routing Performance Test
 ```python
-# Sample Python code to simulate router failure
-import os
+# routing_performance_test.py
+import mx480
+from traffic_generator import TrafficGenerator
 
-def simulate_router_failure(router_ip):
-    os.system(f"ssh admin@{router_ip} power-off")
+mx480 = mx480.MX480()
+traffic_gen = TrafficGenerator()
+
+mx480.configure_routing()
+traffic_gen.generate_traffic()
+
+result = mx480.run_routing_performance_test(traffic_gen)
+
+print(result)
 ```
 
-## Python Regression Test for MX480
-
-### Background
-We are performing a Python regression test for the MX480. The purpose of this test is to identify and address any potential issues that may have been introduced as a result of recent changes to the codebase.
-
-### Test Data
-We obtained the following data for the regression test:
-
+### 2. Firewall Functionality Test
 ```python
-# Import necessary libraries
-import pandas as pd
-import numpy as np
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
+# firewall_test.py
+import mx480
 
-# Load the dataset
-data = pd.read_csv('mx480_regression_data.csv')
+mx480 = mx480.MX480()
 
-# Split the data into features and target variable
-X = data[['feature1', 'feature2', 'feature3']]
-y = data['target']
+mx480.configure_firewall()
+mx480.enable_firewall()
 
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+result = mx480.run_firewall_test()
 
-# Fit the linear regression model
-model = LinearRegression()
-model.fit(X_train, y_train)
-
-# Make predictions
-y_pred = model.predict(X_test)
-
-# Evaluate the model
-mse = mean_squared_error(y_test, y_pred)
-print(f'Mean Squared Error: {mse}')
+print(result)
 ```
 
-### Expected Output
-Upon running the regression test, we expect to see the following output:
+### 3. QoS Validation Test
+```python
+# qos_validation_test.py
+import mx480
 
+mx480 = mx480.MX480()
+mx480.configure_qos()
+
+result = mx480.run_qos_validation_test()
+
+print(result)
 ```
-Mean Squared Error: 0.034
-```
 
-### Conclusion
-Based on the output from the regression test, the mean squared error for the MX480 is within an acceptable range. This indicates that the recent changes to the codebase have not introduced any significant regression issues.
+## Test Results
+The test results will be recorded and analyzed for any deviations from expected behavior. Any failures or issues will be documented and reported for further investigation.
 
-## MX480 Router Configuration Regression Test
+## Conclusion
+The MX480 regression test will provide valuable insights into the performance and functionality of the router, ensuring its reliability for production use.
 
-### Objective:
-The objective of this regression test is to verify the configuration settings on the MX480 router to ensure it is functioning as expected after any recent changes or updates.
+# MX480 Router Regression Test
 
-### Test Setup:
-- MX480 router with the latest software update
-- Test environment with similar network configurations
-- Access to the router's CLI for verification and testing
+## Purpose
+The purpose of this regression test is to verify the configuration of the MX480 router and ensure that it is functioning properly.
 
-### Test Steps:
-1. **Verify Interface Configuration:**
-    ```bash
-    show interfaces terse
-    ```
-    The output should display the list of interfaces with their configured settings and status. Ensure the interfaces are properly configured and are in an operational state.
+## Test Environment
+- Router Model: MX480
+- Software Version: Junos OS 18.4R1.8
+- Test Setup: Console access to the router via SSH
 
-2. **Check Routing Table:**
-    ```bash
-    show route
-    ```
-    Verify the routing table to ensure it has the correct routes and next hops for reaching different networks. 
+## Test Steps
+1. Connect to the console of the router using SSH.
+2. Log in to the router with administrative credentials.
+3. Access the configuration mode and display the current configuration.
+   ```
+   > ssh admin@192.168.1.1
+   Password:
+   > cli
+   # show configuration
+   ```
+4. Verify the interface configurations and ensure that they match the expected settings.
+   ```
+   # show interfaces
+   ```
+5. Check the routing table and ensure that the routes are properly configured.
+   ```
+   # show route
+   ```
+6. Validate the security and firewall policies.
+   ```
+   # show security policies
+   ```
+7. Test the connectivity by pinging external hosts and ensure that there are no packet losses.
+   ```
+   # ping 8.8.8.8
+   ```
 
-3. **Inspect Firewall Policies:**
-    ```bash
-    show configuration security policy
-    ```
-    Check the firewall policies to ensure they are configured correctly and are actively enforcing the desired security rules.
+## Expected Results
+1. Successful login to the router console.
+2. Display of the current configuration without errors.
+3. The interface configurations match the expected settings.
+4. Routing table shows the expected routes.
+5. Proper display of security and firewall policies.
+6. Successful ping to external hosts without packet losses.
 
-4. **Validate BGP Configuration:**
-    ```bash
-    show configuration protocols bgp
-    ```
-    Verify the BGP configuration to ensure peers, neighbors, and route advertisements are correctly configured.
-
-5. **Review System Logging:**
-    ```bash
-    show system syslog
-    ```
-    Check the system logging to verify that it is capturing relevant events and errors.
-
-### Expected Results:
-- All configured interfaces should be up and operational
-- The routing table should contain the expected routes
-- Firewall policies should be correctly enforced
-- BGP peers and route advertisements should be properly configured
-- System logging should be capturing relevant events without errors
-
-### Conclusion:
-After running the regression test and reviewing the output, the MX480 router's configuration has been verified and is functioning as expected. Any discrepancies or issues found will be investigated and resolved accordingly.
+## Conclusion
+Upon conducting the regression test, it was confirmed that the MX480 router's configuration is accurate and functioning properly.
