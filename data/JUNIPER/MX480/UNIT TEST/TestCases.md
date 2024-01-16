@@ -1,308 +1,156 @@
 
-
-# Unit Test Cases for Network MSeries Router MX480
-
-## 1. Interface Configuration Test
-### Test Case 1.1: Verify that all interfaces are configured properly
-#### Description:
-Verify that all physical and logical interfaces are correctly configured and operational.
-
-```python
-# Code snippet
-interface_status = router_interface_status()
-assert interface_status == "up", "Interfaces are not properly configured"
-```
-
-### Test Case 1.2: Verify interface speed and duplex settings
-#### Description:
-Check if the interface speed and duplex settings are as per the specified configuration.
-
-```python
-# Code snippet
-interface_speed_duplex = router_interface_speed_duplex()
-assert interface_speed_duplex == "auto-negotiate", "Interface speed and duplex settings are not as expected"
-```
-
-## 2. Routing Test
-### Test Case 2.1: Verify routing table entries
-#### Description:
-Ensure that the routing table contains the expected network entries.
-
-```python
-# Code snippet
-routing_table = router_routing_table()
-expected_entries = ["192.168.1.0/24", "10.0.0.0/8"]
-assert routing_table.contains(expected_entries), "Routing table does not contain the expected network entries"
-```
-
-### Test Case 2.2: Verify BGP peering status
-#### Description:
-Check if the BGP peering with neighboring routers is established.
-
-```python
-# Code snippet
-bgp_peering_status = router_bgp_peering_status()
-assert bgp_peering_status == "established", "BGP peering with neighboring routers is not established"
-```
-
-## 3. Firewall Test
-### Test Case 3.1: Verify firewall rules
-#### Description:
-Ensure that the firewall rules are active and enforced.
-
-```python
-# Code snippet
-firewall_rules_status = router_firewall_rules_status()
-assert firewall_rules_status == "active", "Firewall rules are not active or enforced"
-```
-
-### Test Case 3.2: Verify VPN tunnel status
-#### Description:
-Check if the VPN tunnels are operational and the traffic is being encrypted/decrypted properly.
-
-```python
-# Code snippet
-vpn_tunnel_status = router_vpn_tunnel_status()
-assert vpn_tunnel_status == "operational", "VPN tunnels are not operational"
-```
-
-These unit test cases cover a range of essential functionalities of the Network MSeries Router MX480, ensuring that the router performs as expected in various networking aspects.
-
-### Test Case 1: Interface Configuration
-
-#### Setup:
-- Connect to the MX480 device using SSH.
-- Enter configuration mode.
-
-```shell
-ssh admin@MX480
-configure
-```
-
-#### Execution:
-Configure interface ge-0/0/0 with IP address 192.168.1.1/24.
-
-```shell
-set interfaces ge-0/0/0 unit 0 family inet address 192.168.1.1/24
-commit
-```
-
-#### Verification:
-Check the configured interface details.
-
-```shell
-show interfaces ge-0/0/0
-```
-
-The output should display the configured IP address.
-
-#### Teardown:
-Exit configuration mode and log out from the device.
-
-```shell
-exit
-exit
-exit
-logout
-```
-
----
-
-### Test Case 2: ACL Configuration
-
-#### Setup:
-- Connect to the MX480 device using SSH.
-- Enter configuration mode.
-
-```shell
-ssh admin@MX480
-configure
-```
-
-#### Execution:
-Configure an access control list to deny traffic from source IP 10.0.0.0/24 to destination IP 192.168.1.0/24.
-
-```shell
-set firewall family inet filter ACL term 1 from source-address 10.0.0.0/24
-set firewall family inet filter ACL term 1 from destination-address 192.168.1.0/24
-set firewall family inet filter ACL term 1 then reject
-set firewall family inet filter ACL term 2 then accept
-commit
-```
-
-#### Verification:
-Check the configured access control list details.
-
-```shell
-show configuration firewall
-```
-
-The output should show the configured ACL rules.
-
-#### Teardown:
-Exit configuration mode and log out from the device.
-
-```shell
-exit
-exit
-exit
-logout
-```
-
----
-
-### Test Case 3: BGP Peering Configuration
-
-#### Setup:
-- Connect to the MX480 device using SSH.
-- Enter configuration mode.
-
-```shell
-ssh admin@MX480
-configure
-```
-
-#### Execution:
-Configure BGP peering with neighbor 192.168.1.2
-
-```shell
-set protocols bgp group internal type internal
-set protocols bgp group internal local-address 192.168.1.1
-set protocols bgp group internal neighbor 192.168.1.2
-commit
-```
-
-#### Verification:
-Check the configured BGP peering details.
-
-```shell
-show configuration protocols bgp
-```
-
-The output should display the configured BGP peerings.
-
-#### Teardown:
-Exit configuration mode and log out from the device.
-
-```shell
-exit
-exit
-exit
-logout
-```
-
-# MX480 Python Unit Test
-
-## Introduction
-The MX480 unit from Juniper Networks is a high-performance, highly efficient and scalable routing platform. In this unit test, we will be using Python to test the functionality of the MX480.
-
-## Test 1: Interface Configuration
-### Description
-We will be testing the configuration of the interfaces on the MX480.
-
-### Test Procedure
-1. Create a test interface configuration.
-2. Apply the configuration to the MX480.
-3. Verify that the interface configuration is applied successfully.
-
-### Code Snippet
-```python
-def test_interface_configuration():
-    test_config = {
-        "interface": "ge-0/0/0",
-        "ipv4_address": "192.168.1.1/24",
-        "description": "Test Interface"
-    }
-    
-    mx480.apply_interface_config(test_config)
-    
-    assert mx480.verify_interface_config(test_config)
-```
-
-## Test 2: Routing Table
-### Description
-We will be testing the routing table functionality of the MX480.
-
-### Test Procedure
-1. Add a test route to the routing table.
-2. Verify that the route is added successfully.
-3. Remove the test route from the routing table.
-4. Verify that the route is removed successfully.
-
-### Code Snippet
-```python
-def test_routing_table():
-    test_route = {
-        "destination": "192.168.2.0/24",
-        "next_hop": "192.168.1.2",
-        "interface": "ge-0/0/1"
-    }
-    
-    mx480.add_route(test_route)
-    
-    assert mx480.verify_route_added(test_route)
-    
-    mx480.remove_route(test_route)
-    
-    assert mx480.verify_route_removed(test_route)
-```
-
-# MX480 Router Configuration Unit Test
-
-## Objective
-The objective of this unit test is to verify the configuration of the MX480 router to ensure that all settings are correctly applied.
-
-## Configuration Details
-The configuration details of the MX480 router are as follows:
-- Hostname: MX480
-- Interfaces: ge-0/0/0, ge-0/0/1
-- Routing Protocols: OSPF, BGP
-- Security Policies: Permit all traffic
-- SNMP Configuration: Version 3, Encryption enabled
-
-## Test Steps
-1. Verify the hostname configuration.
-2. Check the configuration of interfaces ge-0/0/0 and ge-0/0/1.
-3. Verify the settings for OSPF and BGP routing protocols.
-4. Confirm the security policies to permit all traffic.
-5. Check the SNMP configuration and ensure encryption is enabled.
-
-## Test Results
-### Hostname Configuration
-```plaintext
-user@MX480> show configuration | display set | match hostname
-set system host-name MX480;
-```
-
-### Interface Configuration
-```plaintext
-user@MX480> show configuration interfaces ge-0/0/0
-<interface configuration output>
-
-user@MX480> show configuration interfaces ge-0/0/1
-<interface configuration output>
-```
-
-### Routing Protocol Configuration
-```plaintext
-user@MX480> show configuration protocols ospf
-<OSPF configuration output>
-
-user@MX480> show configuration protocols bgp
-<BGP configuration output>
-```
-
-### Security Policy Configuration
-```plaintext
-user@MX480> show configuration security policies
-<security policy configuration output>
-```
-
-### SNMP Configuration
-```plaintext
-user@MX480> show configuration snmp
-<SNMP configuration output>
-```
-
-## Conclusion
-Based on the test results, the MX480 router configuration has been verified and all settings are correctly applied.
+Here are the Unit Test cases for the Network MSeries Router MX480:
+
+|Test Case ID|Test Case Name|Test Case Description|Test Case Priority|Test Case Steps|Expected Result|
+|-|-|-|-|-|-|
+|TC01|Connectivity Test|Verify the connectivity of the router to the network|High|1. Connect the router to a network using an Ethernet cable. 2. Use a web browser to access the router's configuration page (e.g., {URL}). 3. Verify that the router can access the internet.|The router should be able to access the internet.|
+|TC02|Port Forwarding Test|Verify the port forwarding functionality of the router|Medium|1. Access the router's configuration page. 2. Configure port forwarding by specifying the source IP address, destination IP address, and port number. 3. Test the port forwarding by connecting a device to the router's external IP address and port number.|The device should be able to establish a connection with the router.|
+|TC03|Firewall Test|Verify the firewall functionality of the router|Low|1. Access the router's configuration page. 2. Configure the firewall settings to allow or block specific traffic. 3. Test the firewall by connecting a device to the router's network and attempting to access a blocked website. |The website should be accessible or blocked as expected.|
+|TC04|Security Test|Verify the security features of the router|High|1. Access the router's configuration page. 2. Configure the security settings such as WPA2 encryption, guest network, and password protection. 3. Test the security features by connecting a device to the router's network and attempting to access sensitive information.|The device should not be able to access sensitive information.|
+|TC05|Performance Test|Verify the performance of the router|Medium|1. Access the router's configuration page. 2. Configure the performance settings such as QoS, traffic shaping, and bandwidth limiting. 3. Test the performance by running a performance test tool (e.g., SpeedTest) and comparing the results with the default settings.|The performance should be acceptable for the intended use.|
+|TC06|Logging Test|Verify the logging functionality of the router|Low|1. Access the router's configuration page. 2. Configure the logging settings to enable or disable specific logs. 3. Test the logging by generating traffic on the router's network and reviewing the logs.|The logs should contain relevant information about the router's activity.|
+|TC07|Upgrade Test|Verify the upgrade functionality of the router|Medium|1. Access the router's configuration page. 2. Download the latest firmware update for the router. 3. Upgrade the firmware using the router's web-based interface. 4. Test the upgrade by verifying that the router's features and functionality are working correctly.|The router should be functioning correctly after the upgrade.|
+|TC08|Backup and Restore Test|Verify the backup and restore functionality of the router|Low|1. Access the router's configuration page. 2. Configure the backup settings to save the router's configuration to a local file or a remote server. 3. Test the backup by creating a backup and restoring it to a different router. |The backup and restore should be successful.|
+|TC09|Multi-User Test|Verify the multi-user functionality of the router|Medium|1. Access the router's configuration page. 2. Configure the multi-user settings such as guest network and password protection. 3. Test the multi-user functionality by connecting multiple devices to the router's network and verifying that each device can access the internet.|Each device should be able to access the internet without any issues.|
+|TC10|Remote Management Test|Verify the remote management functionality of the router|High|1. Access the router's configuration page. 2. Configure the remote management settings such as remote access and VPN. 3. Test the remote management functionality by connecting a device to the router's network and accessing the router's configuration page remotely.|The device should be able to access the router's configuration page remotely.|
+def test_mx480(self):
+    # Test Setup
+    self.set_up()
+
+    # Test Execution
+    self.test_mx480_get_facts()
+    self.test_mx480_get_interfaces()
+    self.test_mx480_get_memory()
+    self.test_mx480_get_cpu()
+    self.test_mx480_get_raid()
+    self.test_mx480_get_snmp()
+
+    # Test Verification
+    self.verify_mx480_get_facts()
+    self.verify_mx480_get_interfaces()
+    self.verify_mx480_get_memory()
+    self.verify_mx480_get_cpu()
+    self.verify_mx480_get_raid()
+    self.verify_mx480_get_snmp()
+
+    # Test Teardown
+    self.tear_down()
+def test_mx480(self):
+    # Initialize key variables
+    self.device = self.connect.mx480()
+    self.loop = asyncio.get_event_loop()
+    self.serial_number = self.device.get_serial_number()
+    self.loop.run_until_complete(self.device.initialize())
+
+    # Test power on
+    self.loop.run_until_complete(self.device.power_on())
+    self.assertEqual(self.device.get_power_status(), "ON")
+
+    # Test power off
+    self.loop.run_until_complete(self.device.power_off())
+    self.assertEqual(self.device.get_power_status(), "OFF")
+
+    # Test ping
+    self.loop.run_until_complete(self.device.ping())
+    self.assertEqual(self.device.get_ping_status(), "OK")
+
+    # Test get_firmware_version
+    self.loop.run_until_complete(self.device.get_firmware_version())
+    self.assertIn("MX480", self.device.get_firmware_version())
+
+    # Test get_serial_number
+    self.loop.run_until_complete(self.device.get_serial_number())
+    self.assertEqual(self.serial_number, self.device.get_serial_number())
+
+    # Test get_all_channel_status
+    self.loop.run_until_complete(self.device.get_all_channel_status())
+    self.assertIn("OK", self.device.get_all_channel_status())
+
+    # Test get_channel_status
+    self.loop.run_until_complete(self.device.get_channel_status(1))
+    self.assertIn("OK", self.device.get_channel_status(1))
+
+    # Test get_channel_count
+    self.loop.run_until_complete(self.device.get_channel_count())
+    self.assertEqual(self.device.get_channel_count(), 16)
+
+    # Test get_channel_name
+    self.loop.run_until_complete(self.device.get_channel_name(1))
+    self.assertEqual(self.device.get_channel_name(1), "CH1")
+
+    # Test get_channel_voltage_range
+    self.loop.run_until_complete(self.device.get_channel_voltage_range(1))
+    self.assertIn("VOLTAGE_10V", self.device.get_channel_voltage_range(1))
+
+    # Test get_channel_voltage
+    self.loop.run_until_complete(self.device.get_channel_voltage(1))
+    self.assertIn("VOLTAGE_10V", self.device.get_channel_voltage(1))
+
+    # Test set_channel_voltage
+    self.loop.run_until_complete(self.device.set_channel_voltage(1, "VOLTAGE_1V"))
+    self.assertEqual(self.device.get_channel_voltage(1), "VOLTAGE_1V")
+
+    # Test get_channel_current_range
+    self.loop.run_until_complete(self.device.get_channel_current_range(1))
+    self.assertIn("CURRENT_100uA", self.device.get_channel_current_range(1))
+
+    # Test get_channel_current
+    self.loop.run_until_complete(self.device.get_channel_current(1))
+    self.assertIn("CURRENT_100uA", self.device.get_channel_current(1))
+
+    # Test set_channel_current
+    self.loop.run_until_complete(self.device.set_channel_current(1, "CURRENT_10uA"))
+    self.assertEqual(self.device.get_channel_current(1), "CURRENT_10uA")
+
+    # Test get_channel_resistance_range
+    self.loop.run_until_complete(self.device.get_channel_resistance_range(1))
+    self.assertIn("RESISTANCE_1MOhm", self.device.get_channel_resistance_range(1))
+
+    # Test get_channel_resistance
+    self.loop.run_until_complete(self.device.get_channel_resistance(1))
+    self.assertIn("RESISTANCE_1MOhm", self.device.get_channel_resistance(1))
+
+    # Test set_channel_resistance
+    self.loop.run_until_complete(self.device.set_channel_resistance(1, "RESISTANCE_100kOhm"))
+    self.assertEqual(self.device.get_channel_resistance(1), "RESISTANCE_100kOhm")
+
+    # Test get_channel_frequency_range
+    self.loop.run_until_complete(self.device.get_channel_frequency_range(1))
+    self.assertIn("FREQUENCY_1kHz", self.device.get_channel_frequency_range(1))
+
+    # Test get_channel_frequency
+    self.loop.run_until_complete(self.device.get_channel_frequency(1))
+    self.assertIn("FREQUENCY_1kHz", self.device.get_channel_frequency(1))
+
+    # Test set_channel_frequency
+    self.loop.run_until_complete(self.device.set_channel_frequency(1, "FREQUENCY_10kHz"))
+    self.assertEqual(self.device.get_channel_frequency(1), "FREQUENCY_10kHz")
+
+    # Test get_channel_mode
+    self.loop.run_until_complete(self.device.get_channel_mode(1))
+    self.assertIn("DC", self.device.get_channel_mode(1))
+
+    # Test set_channel_mode
+    self.loop.run_until_complete(self.device.set_channel_mode(1, "AC"))
+    self.assertEqual(self.device.get_channel_mode(1), "AC")
+
+    # Test get_channel_impedance_range
+    self.loop.run_until_complete(self.device.get_channel_impedance_range(1))
+    self.assertIn("IMPEDANCE_50Ohm", self.device.get_channel_impedance_range(1))
+
+    # Test get_channel_impedance
+    self.loop.run_until_complete(self.device.get_channel_impedance(1))
+    self.assertIn("IMPEDANCE_50Ohm", self.device.get_channel_impedance(1))
+
+    # Test set_channel_impedance
+    self.loop.run_until_complete(self.device.set_channel_impedance(1, "IMPEDANCE_1kOhm"))
+    self.assertEqual(self.device.get_channel_impedance(1), "IMPEDANCE_1kOhm")
+def test_mx480_advanced_interfaces_operations(self):
+    logging.info("Testing advanced interfaces operations on MX480 router.")
+    test_data = [
+        "advanced_interfaces_operations_test",
+        "interfaces_operations_advanced_test",
+    ]
+    result = self.target.run(test_data)
+    assert result[0] is True, "Advanced interfaces operations test failed."
+    assert result[1] is True, "Interfaces operations advanced test failed."
