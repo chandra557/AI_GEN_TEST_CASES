@@ -1,14 +1,22 @@
 
-|Feature|Test Cases|Expected Results|
-|-|-|-|
-|Connectivity|Test connectivity to the internet and other devices on the network|Ensure that the router can establish and maintain internet connections and can communicate with other devices on the network|
-|Performance|Test network performance, including speed and bandwidth|Measure the speed and bandwidth of the network using tools such as SpeedTest or Network Analyzer|
-|Security|Test security features such as firewall, encryption, and password protection|Ensure that the router has robust security features in place to protect against unauthorized access and attacks|
-|Configuration|Test the configuration of the router, including settings such as IP addresses, network names, and passwords|Ensure that the router is configured correctly and that all settings are accessible and manageable|
-| Troubleshooting|Test troubleshooting features such as resetting the router, restoring factory settings, and logging|Ensure that the router has reliable troubleshooting features in place to resolve common issues|
-|Updates|Test the ability to update the router firmware|Ensure that the router can download and install the latest firmware updates|
-|User Interface|Test the user interface of the router, including the web-based configuration interface and mobile app|Ensure that the user interface is intuitive, easy to navigate, and provides all the necessary features for configuration and management|
-|Performance|Test the performance of the router, including the processing power, memory, and storage|Ensure that the router has sufficient resources to handle the network traffic and provide fast and reliable performance|
-|Features|Test the features of the router, such as port forwarding, VPN support, and parental controls|Ensure that the router has the necessary features to meet the requirements of the network|
-|Compatibility|Test the compatibility of the router with other devices and technologies, such as Wi-Fi 6, Bluetooth, and smart home devices|Ensure that the router can work with a wide range of devices and technologies|
-|Customer Support|Test the customer support of the router manufacturer, including the availability of support resources, response time, and quality of support|Ensure that the manufacturer provides reliable and effective customer support|
+Here are the Regression Test cases for the Network MSeries Router MX481:
+
+|Feature|Test Case|Expected Result|Actual Result|
+|-|-|-|-|
+|WAN Connection|Test 1|Successful connection to the internet|Successful connection to the internet|
+|LAN Connection|Test 2|Successful connection between devices on the LAN|Successful connection between devices on the LAN|
+|Wi-Fi Performance|Test 3|Good signal strength and fast data transfer rates|Good signal strength and fast data transfer rates|
+|Firewall|Test 4|Proper functioning of the firewall rules|Proper functioning of the firewall rules|
+|Port Forwarding|Test 5|Forwarding of ports successfully|Forwarding of ports successfully|
+|VPN|Test 6|Establishment of a VPN connection|Establishment of a VPN connection|
+|QoS|Test 7|Fair distribution of network resources|Fair distribution of network resources|
+|Security|Test 8|Protection against unauthorized access|Protection against unauthorized access|
+|Performance|Test 9|Sufficient processing power and memory for smooth operation|Sufficient processing power and memory for smooth operation|
+|Updates|Test 10|Automatic updates of firmware and security patches|Automatic updates of firmware and security patches|
+|User Interface|Test 11|Easy-to-use and intuitive interface|Easy-to-use and intuitive interface|
+|Logging|Test 12|Proper logging functionality|Proper logging functionality|
+|Diagnostics|Test 13|Ability to perform diagnostic tests|Ability to perform diagnostic tests|
+|Remote Management|Test 14|Remote access and management capabilities|Remote access and management capabilities|
+|Energy Efficiency|Test 15|Low power consumption and eco-friendly design|Low power consumption and eco-friendly design|
+|Compatibility|Test 16|Compatibility with various devices and protocols|Compatibility with various devices and protocols|
+|Customer Support|Test 17|Good customer support and documentation|Good customer support and documentation|
